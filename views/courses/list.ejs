@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Course List</title>
+    <style>
+      :root {
+        --sky: #38bdf8;
+        --sky-dark: #0ea5e9;
+        --text-dark: #1e293b;
+        --text-light: #ffffff;
+        --accent: #0f172a;
+        --button-hover: #0284c7;
+        --danger: #ef4444;
+        --danger-hover: #dc2626;
+      }
+
+      * {
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-color: #f0f9ff;
+        padding: 2rem;
+        color: var(--accent);
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      h2 {
+        font-size: 2rem;
+        color: var(--sky-dark);
+      }
+
+      .actions {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+      }
+
+      .button {
+        text-decoration: none;
+        background-color: var(--sky-dark);
+        color: var(--text-light);
+        padding: 0.6rem 1.2rem;
+        border-radius: 0.4rem;
+        font-weight: bold;
+        transition: background-color 0.3s;
+      }
+
+      .button:hover {
+        background-color: var(--button-hover);
+      }
+
+      .table-wrapper {
+        overflow-x: auto;
+        margin: 0 auto;
+        max-width: 1000px;
+        background-color: #ffffff;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      thead {
+        background-color: var(--sky-dark);
+        color: white;
+      }
+
+      th,
+      td {
+        padding: 1rem;
+        text-align: left;
+        border-bottom: 1px solid #e2e8f0;
+      }
+
+      tbody tr:hover {
+        background-color: #f1f5f9;
+      }
+
+      .icon-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+        margin-right: 0.5rem;
+        color: var(--sky-dark);
+      }
+
+      .icon-btn:hover {
+        color: var(--button-hover);
+      }
+
+      .icon-btn.delete {
+        color: var(--danger);
+      }
+
+      .icon-btn.delete:hover {
+        color: var(--danger-hover);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h2>Course Directory</h2>
+      <div class="actions">
+        <a href="javascript:history.back()" class="button">← Back</a>
+        <a href="/" class="button">🏠 Home</a>
+        <a href="/courses/new" class="button">➕ Add Course</a>
+      </div>
+    </div>
+
+    <div class="table-wrapper">
+      <% if (courses.length === 0) { %>
+      <p>No courses found.</p>
+      <% } else { %>
+      <table>
+        <thead>
+          <tr>
+            <th>S/N</th>
+            <th>Course</th>
+            <th>Teacher</th>
+            <th>Credit</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% courses.forEach((course, index) => { %>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td>
+              <a href="/courses/<%= course.id %>"> <%= course.courseName %> </a>
+            </td>
+            <td><%= course.teacher %></td>
+            <td><%= course.credits %></td>
+            <td>
+              <a
+                href="/courses/<%= course.id %>/edit"
+                class="icon-btn"
+                title="Edit"
+                >✏️</a
+              >
+              <form
+                action="/courses/<%= course.id %>?_method=DELETE"
+                method="POST"
+                style="display: inline"
+              >
+                <button type="submit" class="icon-btn delete" title="Delete">
+                  🗑️
+                </button>
+              </form>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      <% } %>
+    </div>
+  </body>
+</html>

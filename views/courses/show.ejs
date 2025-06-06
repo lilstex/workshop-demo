@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Course Details</title>
+    <style>
+      :root {
+        --sky: #38bdf8;
+        --sky-dark: #0ea5e9;
+        --text-dark: #1e293b;
+        --text-light: #ffffff;
+        --bg-light: #f0f9ff;
+        --button-hover: #0284c7;
+      }
+
+      * {
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-color: var(--bg-light);
+        padding: 2rem;
+        color: var(--text-dark);
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        background: #fff;
+        padding: 2rem;
+        border-radius: 0.75rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        color: var(--sky-dark);
+      }
+
+      .info {
+        font-size: 1.1rem;
+        line-height: 1.8;
+      }
+
+      .info strong {
+        color: var(--sky-dark);
+      }
+
+      .actions {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 2rem;
+      }
+
+      .button {
+        background-color: var(--sky-dark);
+        color: var(--text-light);
+        padding: 0.6rem 1rem;
+        border: none;
+        border-radius: 0.5rem;
+        font-size: 0.95rem;
+        cursor: pointer;
+        text-decoration: none;
+        text-align: center;
+      }
+
+      .button:hover {
+        background-color: var(--button-hover);
+      }
+
+      .link-button {
+        background-color: transparent;
+        color: var(--sky-dark);
+        border: none;
+        font-weight: bold;
+        cursor: pointer;
+        text-decoration: underline;
+        font-size: 0.95rem;
+      }
+
+      .link-button:hover {
+        color: var(--button-hover);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Course Details</h2>
+      <div class="info">
+        <p><strong>Course:</strong> <%= course.courseName %></p>
+        <p><strong>Teacher:</strong> <%= course.teacher %></p>
+        <p><strong>Credits:</strong> <%= course.credits %></p>
+      </div>
+
+      <div class="actions">
+        <a href="/courses" class="button">← Back to List</a>
+        <a href="/" class="link-button">🏠 Home</a>
+      </div>
+    </div>
+  </body>
+</html>
