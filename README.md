@@ -84,7 +84,7 @@ This project uses the following Node.js packages:
 
 ---
 
-## 💡 Tasks You Can Complete Using AI Tools
+## 💡 Tasks
 
 This project encourages the use of **AI pair-programming** tools like ChatGPT, Copilot, or DeepSeek to explore and build additional features.
 
@@ -92,7 +92,8 @@ Here are some **AI-assisted tasks** you can try:
 
 - ✅ **Add a confirmation message** before deleting a student or course record (e.g., with a browser prompt).
 - ✅ **Add flash messages** to notify users when a record is created, updated, or deleted.
-- ✅ **Generate full application documentation** (e.g., using ChatGPT or deepseek).
+- ✅ **Add a 404 page** for handling not found pages and routes.
+- ✅ **Generate full application documentation**.
 
 > These exercises will help reinforce how AI tools can support you in writing, refactoring, and documenting code.
 
