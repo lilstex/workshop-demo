@@ -2,22 +2,17 @@ const { students, generateStudentId } = require("../data/storage");
 const Student = require("../models/studentModel");
 
 exports.getAllStudents = (req, res) => {
-  res.json(students);
+  res.render("students/list", { students });
 };
 
-exports.getStudentById = (req, res) => {
-  const id = parseInt(req.params.id, 10);
-  const student = students.find((s) => s.id === id);
-  if (!student) {
-    return res.status(404).json({ message: "Student not found" });
-  }
-  res.json(student);
+exports.renderCreateForm = (req, res) => {
+  res.render("students/form", { student: null });
 };
 
 exports.createStudent = (req, res) => {
   const { firstName, lastName, email, gradeLevel } = req.body;
   if (!firstName || !lastName || !email || !gradeLevel) {
-    return res.status(400).json({ message: "Missing required fields" });
+    return res.status(400).send("Missing required fields");
   }
   const id = generateStudentId();
   const newStudent = new Student({
@@ -28,14 +23,32 @@ exports.createStudent = (req, res) => {
     gradeLevel,
   });
   students.push(newStudent);
-  res.status(201).json(newStudent);
+  res.redirect("/students");
+};
+
+exports.getStudentById = (req, res) => {
+  const id = parseInt(req.params.id, 10);
+  const student = students.find((s) => s.id === id);
+  if (!student) {
+    return res.status(404).send("Student not found");
+  }
+  res.render("students/show", { student });
+};
+
+exports.renderEditForm = (req, res) => {
+  const id = parseInt(req.params.id, 10);
+  const student = students.find((s) => s.id === id);
+  if (!student) {
+    return res.status(404).send("Student not found");
+  }
+  res.render("students/form", { student });
 };
 
 exports.updateStudent = (req, res) => {
   const id = parseInt(req.params.id, 10);
   const student = students.find((s) => s.id === id);
   if (!student) {
-    return res.status(404).json({ message: "Student not found" });
+    return res.status(404).send("Student not found");
   }
 
   // Only update provided fields
@@ -45,7 +58,7 @@ exports.updateStudent = (req, res) => {
   if (email !== undefined) student.email = email;
   if (gradeLevel !== undefined) student.gradeLevel = gradeLevel;
 
-  res.json(student);
+  res.redirect("/students");
 };
 
 exports.deleteStudent = (req, res) => {
@@ -55,5 +68,5 @@ exports.deleteStudent = (req, res) => {
     return res.status(404).json({ message: "Student not found" });
   }
   students.splice(idx, 1);
-  res.status(204).send();
+  res.redirect("/students");
 };

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Add New Course</title>
+    <title><%= course ? "Edit Course" : "Add New Course" %></title>
     <style>
       :root {
         --sky: #38bdf8;
@@ -100,12 +100,32 @@
   </head>
   <body>
     <div class="container">
-      <h2>Add New Course</h2>
-      <form action="/courses" method="POST">
-        <input name="courseName" placeholder="Course Name" required />
-        <input name="teacher" placeholder="Teacher's Name" required />
-        <input name="credits" placeholder="Credits" required />
-        <button type="submit" class="button">Save Course</button>
+      <h2><%= course ? "Edit Course" : "Add New Course" %></h2>
+      <form
+        action="/courses<%= course ? '/' + course.id + '?_method=PUT' : '' %>"
+        method="POST"
+      >
+        <input
+          name="courseName"
+          placeholder="Course Name"
+          required
+          value="<%= course?.courseName || '' %>"
+        />
+        <input
+          name="teacher"
+          placeholder="Teacher's Name"
+          required
+          value="<%= course?.teacher || '' %>"
+        />
+        <input
+          name="credits"
+          placeholder="Credits"
+          required
+          value="<%= course?.credits || '' %>"
+        />
+        <button type="submit" class="button">
+          <%= course ? "Update Course" : "Save Course" %>
+        </button>
       </form>
 
       <div class="actions">

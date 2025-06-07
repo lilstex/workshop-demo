@@ -1,186 +1,123 @@
 # 🏫 School Management System (Workshop Demo)
 
-A simple, beginner-friendly **Node.js + Express** API project for managing students and courses, built with **AI-assisted development** using tools like ChatGPT, Copilot, and DeepSeek.
+A simple, beginner-friendly **Node.js + Express** MVC project for managing students and courses, built with **AI-assisted development** using tools like **ChatGPT**, **GitHub Copilot**, and **DeepSeek**.
 
-> 🧠 Perfect for learning how to **build backend APIs** and **collaborate with AI tools** as a software engineer.
+> 🧠 Perfect for learning how to **build applications** and **collaborate with AI tools** as a software engineer.
 
 ---
 
 ## 📁 Project Structure
 
 ```
+
 workshop-demo/
 ├── controllers/
-│   ├── studentController.js     # Handles student logic
-│   └── courseController.js      # Handles course logic
+│   ├── studentController.js
+│   └── courseController.js
 ├── routes/
-│   ├── studentRoutes.js         # Student API routes
-│   └── courseRoutes.js          # Course API routes
+│   ├── studentRoutes.js
+│   └── courseRoutes.js
+├── views/
+│   ├── courses/
+│   └── students/
 ├── models/
-│   ├── studentModel.js          # In-memory student data
-│   └── courseModel.js           # In-memory course data
+│   ├── studentModel.js
+│   └── courseModel.js
 ├── data/
-│   └── storage.js               # Shared array-based data store
-└── index.js                     # Entry point, sets up Express app
+│   └── storage.js
+├── public/
+└── index.js
+
 ```
 
 ---
 
-## 🚀 Project Setup (with AI Assistance)
+## ⚙️ Prerequisites
 
-AI tools help you move faster and more confidently. Here's how this project was scaffolded using **ChatGPT, Copilot, and DeepSeek**.
+To run this project locally, ensure you have the following installed:
 
-### 🧱 Step 1: Initialize the Node.js Project
-
-> **Prompt:** > _"Show me the commands to initialize a Node.js + Express project from scratch"_
-
-```bash
-mkdir sms-demo
-cd sms-demo
-npm init -y
-npm install express
-```
-
----
-
-### 🧰 Step 2: Generate Express Boilerplate
-
-> **Prompt:** > _"Generate a simple expressjs app and listen on port 3000"_
-
-```js
-// index.js
-const express = require("express");
-const app = express();
-const studentRoutes = require("./routes/studentRoutes");
-const courseRoutes = require("./routes/courseRoutes");
-
-app.use(express.json());
-app.use("/api/students", studentRoutes);
-app.use("/api/courses", courseRoutes);
-
-app.listen(3000, () => console.log("Server running on port 3000"));
-```
-
----
-
-### 🧠 Step 3: Create Controllers with ChatGPT
-
-> **Prompt:** > _"Write an Express.js controller for a Course entity that can handle: getting all courses, getting a course by ID, creating a course, updating a course, and deleting a course. Use in-memory storage (an array) and assume generateCourseId() gives unique IDs."_
-
-Example AI-generated output:
-
-```js
-// courseController.js
-const { courses, generateCourseId } = require("../data/storage");
-
-exports.getAllCourses = (req, res) => {
-  res.json(courses);
-};
-```
-
----
-
-### 🔁 Step 4: Define Routes with Copilot or ChatGPT
-
-> **Prompt:** > _"Generate an Express.js router for the Student controller. Assume the controller is imported as studentController..."_
-
-```js
-// studentRoutes.js
-const express = require("express");
-const router = express.Router();
-const studentController = require("../controllers/studentController");
-
-router.get("/", studentController.getAllStudents);
-router.get("/:id", studentController.getStudentById);
-router.post("/", studentController.createStudent);
-router.put("/:id", studentController.updateStudent);
-router.delete("/:id", studentController.deleteStudent);
-
-module.exports = router;
-```
-
----
-
-### 🐛 Step 5: Debugging With AI
-
-> **Prompt:** > _"I have this controller code in getAllCourses:_
-
-```js
-exports.getAllCourses = (req, res) => {
-  res.json(course); // error occurs here
-};
-```
-
-_It says 'Cannot read property find of undefined'. How do I fix it?"_
-
-> **AI Response:**
-> Check if `course` is undefined. Likely typo—should be `courses`. Make sure it's correctly imported from your model or data file.
+- [Node.js](https://nodejs.org/) (v16 or above)
+- [Visual Studio Code](https://code.visualstudio.com/) or any other code editor of your choice
+- [Git](https://git-scm.com/) (optional, for cloning the repository)
 
 ---
 
 ## 📦 Running the Project
 
-1. Clone the repo or copy the files.
-2. Install dependencies:
+1. **Clone the repository** or [download it as a ZIP](https://github.com/lilstex/workshop-demo):
+
+```bash
+git clone https://github.com/lilstex/workshop-demo.git
+cd school-management-demo
+```
+
+2. **Install dependencies**:
 
 ```bash
 npm install
 ```
 
-3. Start the server:
+3. **Start the development server**:
 
 ```bash
 node index.js
 ```
 
-4. The server will be running at: `http://localhost:3000`
+4. Open your browser and navigate to:
 
----
-
-## 🧪 Sample API Endpoints
-
-Use these sample `curl` requests to test your endpoints.
-
-### 👩‍🎓 Student APIs
-
-- **Get all students**
-
-```bash
-curl http://localhost:3000/api/students
 ```
-
-- **Add a student**
-
-```bash
-curl -X POST http://localhost:3000/api/students \
--H "Content-Type: application/json" \
--d '{"name": "Jane Doe", "age": 15, "class": "10A"}'
-```
-
-### 📚 Course APIs
-
-- **Get all courses**
-
-```bash
-curl http://localhost:3000/api/courses
-```
-
-- **Add a course**
-
-```bash
-curl -X POST http://localhost:3000/api/courses \
--H "Content-Type: application/json" \
--d '{"title": "Mathematics", "code": "MATH101"}'
+http://localhost:3000
 ```
 
 ---
 
-## 💡 Key Takeaway
+## 📚 Key Dependencies
 
-This project is a practical example of how **AI tools can assist at every stage** of software development:
+This project uses the following Node.js packages:
 
-- Scaffolding a project
-- Generating boilerplate code
-- Debugging errors
-- Writing documentation
-- Learning by doing
+| Package             | Purpose                                                       |
+| ------------------- | ------------------------------------------------------------- |
+| **express**         | Web framework for routing and middleware                      |
+| **ejs**             | Template engine for rendering dynamic HTML pages              |
+| **method-override** | Enables support for PUT and DELETE methods in HTML forms      |
+| **path**            | Core Node.js module for working with file and directory paths |
+
+---
+
+## 💡 Tasks You Can Complete Using AI Tools
+
+This project encourages the use of **AI pair-programming** tools like ChatGPT, Copilot, or DeepSeek to explore and build additional features.
+
+Here are some **AI-assisted tasks** you can try:
+
+- ✅ **Add a confirmation message** before deleting a student or course record (e.g., with a browser prompt).
+- ✅ **Add flash messages** to notify users when a record is created, updated, or deleted.
+- ✅ **Generate full application documentation** (e.g., using ChatGPT or deepseek).
+
+> These exercises will help reinforce how AI tools can support you in writing, refactoring, and documenting code.
+
+---
+
+## 🧠 Why AI-Assisted Development?
+
+This project is part of a workshop titled:
+
+> **"Navigating the Tech Industry as a Beginner With AI", Organised by Goddaffi Softwares**
+
+The goal is to help new developers understand how to:
+
+- Learn software development quickly
+- Use modern AI tools as collaborative coding assistants
+- Build and deploy functional applications with minimal overhead
+
+---
+
+## 📄 Application Documentation
+
+📘 Full application documentation is available in a separate `docs.md` file. Coming soon!
+
+---
+
+## 🛠️ License
+
+MIT — feel free to fork and build upon it.

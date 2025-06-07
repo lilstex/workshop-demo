@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Add New Student</title>
+    <title><%= student ? "Edit Student" : "Add New Student" %></title>
     <style>
       :root {
         --sky: #38bdf8;
@@ -100,13 +100,39 @@
   </head>
   <body>
     <div class="container">
-      <h2>Add New Student</h2>
-      <form action="/students" method="POST">
-        <input name="firstName" placeholder="First Name" required />
-        <input name="lastName" placeholder="Last Name" required />
-        <input name="email" type="email" placeholder="Email" required />
-        <input name="gradeLevel" placeholder="Grade Level" required />
-        <button type="submit" class="button">Save Student</button>
+      <h2><%= student ? "Edit Student" : "Add New Student" %></h2>
+      <form
+        action="/students<%= student ? '/' + student.id + '?_method=PUT' : '' %>"
+        method="POST"
+      >
+        <input
+          name="firstName"
+          placeholder="First Name"
+          required
+          value="<%= student?.firstName || '' %>"
+        />
+        <input
+          name="lastName"
+          placeholder="Last Name"
+          required
+          value="<%= student?.lastName || '' %>"
+        />
+        <input
+          name="email"
+          type="email"
+          placeholder="Email"
+          required
+          value="<%= student?.email || '' %>"
+        />
+        <input
+          name="gradeLevel"
+          placeholder="Grade Level"
+          required
+          value="<%= student?.gradeLevel || '' %>"
+        />
+        <button type="submit" class="button">
+          <%= student ? "Update Student" : "Save Student" %>
+        </button>
       </form>
 
       <div class="actions">
